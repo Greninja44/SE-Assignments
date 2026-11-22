@@ -6,7 +6,7 @@ os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
 
 import pygame
 
-from game.game_engine import GameEngine, GAP_HEIGHT, WALL_WIDTH, SCROLL_SPEED
+from game.game_engine import GameEngine, GAP_HEIGHT, PIXELS_PER_METER, WALL_WIDTH, SCROLL_SPEED
 from game.obstacle import Obstacle
 from game.renderer import HEIGHT
 
@@ -86,6 +86,62 @@ class TestCollision(unittest.TestCase):
         obstacles = engine.obstacles
         engine.handle_keydown(pygame.K_r)
         self.assertIs(engine.obstacles, obstacles)
+
+
+class TestDistanceScore(unittest.TestCase):
+    def test_starts_at_zero(self):
+        self.assertEqual(GameEngine().score, 0)
+
+    def test_increases_automatically_while_playing(self):
+        engine = make_engine()
+        scores = []
+        for _ in range(300):
+            engine.update()
+            scores.append(engine.score)
+        self.assertEqual(scores, sorted(scores))
+        self.assertGreater(scores[-1], 0)
+
+    def test_distance_matches_scroll_speed(self):
+        engine = make_engine()
+        for _ in range(100):
+            engine.update()
+        self.assertEqual(engine.score, 100 * SCROLL_SPEED // PIXELS_PER_METER)
+
+    def test_stops_increasing_after_game_over(self):
+        engine = make_engine(gap_y=HEIGHT / 2 + 150)
+        engine.update()
+        final = engine.distance
+        for _ in range(50):
+            engine.update()
+        self.assertEqual(engine.distance, final)
+
+    def test_final_distance_is_shown_on_game_over(self):
+        pygame.init()
+        engine = make_engine()
+        for _ in range(200):
+            engine.update()
+        engine.obstacles = [obstacle_at_helicopter(engine, HEIGHT / 2 + 150)]
+        engine.update()
+        self.assertTrue(engine.game_over)
+        shown = []
+        font = pygame.font.SysFont("consolas", 22)
+        real_render = font.render
+        class SpyFont:
+            def render(self, text, *a):
+                shown.append(text)
+                return real_render(text, *a)
+        engine.draw(pygame.Surface((700, 500)), SpyFont())
+        self.assertTrue(any(str(engine.score) in t and "GAME OVER" in t for t in shown))
+
+    def test_new_game_resets_distance_to_zero(self):
+        engine = make_engine()
+        for _ in range(200):
+            engine.update()
+        self.assertGreater(engine.score, 0)
+        engine.game_over = True
+        engine.handle_keydown(pygame.K_r)
+        self.assertEqual(engine.score, 0)
+        self.assertEqual(engine.distance, 0)
 
 
 if __name__ == "__main__":
