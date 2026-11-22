@@ -21,3 +21,10 @@ python -m unittest
 36 unit tests cover the speed cap, reversing, both screen edges, collisions with the top and bottom wall,
 flying through the gap, the score, restarting, and the shield (one hit only, one hit per obstacle, recharge,
 and reset on a new game).
+
+## Videos
+
+`videos/before.mp4` and `videos/after.mp4` are 10 second clips of the starter code and the finished game. They were
+rendered by running the game headlessly with scripted key presses (no screen recording), so they show the same
+code and behaviour as `python main.py`: the helicopter flying off the bottom of the screen and through obstacles in
+the starter, and the capped movement, score, shield ring, recharge text and game-over message in the final game.
