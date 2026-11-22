@@ -1,0 +1,23 @@
+Issue Id,Parent Id,Issue Type,Summary,Description,Priority,Story point estimate,Sprint
+E1,,Epic,"Catalog Search (FR-001, NFR-001)","Members find a book by ISBN and see whether a copy is available, quickly.",,,
+S1.1,E1,Story,1.1 Search by ISBN,"As a Student Member, I want to search the catalog by ISBN, so that I can find the exact book I need.",High,3,Sprint 1
+S1.2,E1,Story,1.2 View Availability Status,"As a Student Member, I want to see whether each copy is on the shelf or on loan and how many members are waiting, so that I know whether I need to place a hold.",High,3,Sprint 1
+S1.3,E1,Story,1.3 Search by Title or Author,"As a Student Member, I want to search by title or author when I do not know the ISBN, so that I can still find the book.",Medium,2,Sprint 2
+S1.4,E1,Story,1.4 Fast Paginated Results,"As a Head Librarian, I want to search results to be indexed and paginated, so that a search over 50,000 titles returns in under 150 ms.",High,5,Sprint 1
+E2,,Epic,"Hold Queue (FR-001, FR-003, NFR-002)","Members join a fair FIFO waitlist for loaned books, see their place and can leave the queue.",,,
+S2.1,E2,Story,2.1 Place Hold Request,"As a Student Member, I want to place a hold on a book that is on loan, so that I join its waitlist.",High,5,Sprint 1
+S2.2,E2,Story,2.2 Limit Holds per Member,"As a Head Librarian, I want to the system to stop a member holding more than the maximum number of holds, so that popular books are shared fairly.",High,3,Sprint 1
+S2.3,E2,Story,2.3 Keep Queue FIFO under Load,"As a Student Member, I want to my place in the queue to follow the order in which I asked, even when many members ask at once, so that the queue is fair.",High,8,Sprint 1
+S2.4,E2,Story,2.4 View Queue Position,"As a Student Member, I want to see my position for each hold, so that I know how long I may wait.",Medium,2,Sprint 1
+S2.5,E2,Story,2.5 Cancel Hold,"As a Student Member, I want to cancel a hold I no longer need, so that the members behind me move up.",Medium,3,Sprint 2
+E3,,Epic,Hold Notifications (FR-002),A returned copy is offered to the first member in the queue and reserved for them.,,,
+S3.1,E3,Story,3.1 Process Book Return,"As a Head Librarian, I want to record a returned book, so that the copy can go to the next member.",High,3,Sprint 1
+S3.2,E3,Story,3.2 Notify Next Member,"As a Student Member, I want to be notified by email and in-app within 5 minutes when my book is returned, so that I can collect it quickly.",High,5,Sprint 2
+S3.3,E3,Story,3.3 48-Hour Pickup Window,"As a Student Member, I want to the copy to be kept for me for 48 hours, so that I have time to collect it.",Medium,3,Sprint 2
+S3.4,E3,Story,3.4 Offer to Next Member,"As a Student Member, I want to the copy to be offered to me when the member ahead does not collect it, so that books are not left idle on the hold shelf.",Medium,5,Sprint 2
+E4,,Epic,"Overdue Fines (FR-004, FR-005)",Late returns are fined consistently and members can pay online.,,,
+S4.1,E4,Story,4.1 Calculate Overdue Fine,"As a Head Librarian, I want to fines calculated at Rs. 5 per day per book, capped at Rs. 500, so that late returns are charged consistently.",High,5,Sprint 2
+S4.2,E4,Story,4.2 Show Fines on Account,"As a Student Member, I want to see my fines on my account, so that I know what I owe.",Medium,2,Sprint 2
+S4.3,E4,Story,4.3 Pay Fine Online,"As a Student Member, I want to pay by card, UPI or net banking, so that I do not need to visit the desk.",Medium,5,Sprint 2
+S4.4,E4,Story,4.4 Payment Receipt,"As a Student Member, I want to get a receipt with the book, amount and date, so that I have proof of payment.",Medium,2,Sprint 2
+S4.5,E4,Story,4.5 Waive or Adjust Fine,"As a Head Librarian, I want to waive or reduce a fine and record the reason, so that genuine cases are treated fairly.",Low,3,Sprint 2
