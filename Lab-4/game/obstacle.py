@@ -15,6 +15,7 @@ class Obstacle:
         self.screen_height = screen_height
         self.speed = speed
         self.scored = False   # used for distance/pass tracking later
+        self.shield_hit = False   # the shield already absorbed a hit from this obstacle
 
     def update(self):
         self.x -= self.speed
